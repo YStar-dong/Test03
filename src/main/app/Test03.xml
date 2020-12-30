@@ -1,24 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:ftp="http://www.mulesoft.org/schema/mule/ee/ftp" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/ee/ftp http://www.mulesoft.org/schema/mule/ee/ftp/current/mule-ftp-ee.xsd http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">  
-  <flow name="Test03">
-    <http:listener config-ref="HTTP_Listener_Test03" path="/Test/Test03" doc:name="HTTP Listener Test03"/>
-    <custom-transformer class="com.definesys.dsgc.mule.processor.MuleMsgProcessor" doc:name="INST">
-      <spring:property name="stage" value="INST"/>
-    </custom-transformer>
-    <custom-transformer class="com.definesys.dsgc.mule.processor.MuleMsgProcessor" doc:name="OB">
-      <spring:property name="stage" value="OB"/>
-      <spring:property name="toSystem" value="LES"/>
-    </custom-transformer>
-    <http:request config-ref="HTTP_Request_Test03" path="/Test/Test03" method="POST" doc:name="HTTP Request Test03"/>
-    <custom-transformer class="com.definesys.dsgc.mule.processor.MuleMsgProcessor" doc:name="OB_RES">
-      <spring:property name="stage" value="OB_RES"/>
-      <spring:property name="toSystem" value="LES"/>
-    </custom-transformer>
-    <custom-transformer class="com.definesys.dsgc.mule.processor.MuleMsgProcessor" doc:name="INST_RES">
-      <spring:property name="stage" value="INST_RES"/>
-    </custom-transformer>
-    <set-property propertyName="Content-Type" value="application/json;charset=utf-8" doc:name="Property"/>
-    <exception-strategy ref="Global_Rest_Exception_Strategy" doc:name="Reference Exception Strategy"/>
-  </flow>
-</mule>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:ftp="http://www.mulesoft.org/schema/mule/ee/ftp" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/ee/ftp http://www.mulesoft.org/schema/mule/ee/ftp/current/mule-ftp-ee.xsd http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd"> </mule>
