@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:ws="http://www.mulesoft.org/schema/mule/ws"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:sap="http://www.mulesoft.org/schema/mule/sap"
+	xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ws http://www.mulesoft.org/schema/mule/ws/current/mule-ws.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/sap http://www.mulesoft.org/schema/mule/sap/current/mule-sap.xsd
+http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd"><!-- Rest Exception -->
+    <catch-exception-strategy name="CatchExceptionStrategy">
+        <set-property propertyName="http.status" value="500" doc:name="Property"/>
+        <set-payload value="#['{&quot;rtnCode&quot;:&quot;U&quot;,&quot;rtnMsg&quot;:&quot;&#35775;&#38382;&#22833;&#36133;&#65281;&quot;}']" doc:name="Set Payload"/>
+		<custom-transformer class="com.definesys.dsgc.mule.processor.MuleMsgProcessor" doc:name="OB_RES">
+			<spring:property name="stage" value="OB_RES"/>
+		</custom-transformer>
+		<custom-transformer class="com.definesys.dsgc.mule.processor.MuleMsgProcessor" doc:name="INST_RES">
+			<spring:property name="stage" value="INST_RES"/>
+		</custom-transformer>
+    </catch-exception-strategy>
+    <catch-exception-strategy when="#[exception.causeMatches('com.definesys.dsgc.mule.security.*')]" name="securityException">
+        <set-property propertyName="http.status" value="401" doc:name="Property"/>
+        <set-payload value="#['{&quot;rtnCode&quot;:&quot;401&quot;,&quot;rtnMsg&quot;:&quot;认证失败！&quot;']" doc:name="Set Payload"/>
+    </catch-exception-strategy>
+    <choice-exception-strategy name="Global_Rest_Exception_Strategy">
+        <exception-strategy ref="securityException" doc:name="Reference Exception Strategy"/>
+        <exception-strategy ref="CatchExceptionStrategy" doc:name="Reference Exception Strategy"/>
+    </choice-exception-strategy><!-- LES暴露的HTTP -->
+    <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="${Test03.http.port}" doc:name="HTTP Listener Configuration"/></mule>
