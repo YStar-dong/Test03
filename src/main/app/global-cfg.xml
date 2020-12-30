@@ -23,5 +23,6 @@
   <!-- LES暴露的HTTP -->  
   <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="${Test03.http.port}" doc:name="HTTP Listener Configuration"/>  
   <http:request-config name="HTTP_Request_Configuration_Test03" host="10.173.1.199" port="9003" doc:name="HTTP Request Configuration Test03"/>  
-  <http:request-config name="HTTP_Request_Configuration_Test03" host="10.173.1.199" port="9003" doc:name="HTTP Request Configuration Test03"/> 
+  <http:request-config name="HTTP_Request_Configuration_Test03" host="10.173.1.199" port="9003" doc:name="HTTP Request Configuration Test03"/>  
+  <http:request-config name="HTTP_Request_Configuration_Test03" host="10.173.1.199" port="9003" doc:name="HTTP Request Configuration Test03"/>
 </mule>
